@@ -6,6 +6,7 @@ export default function Cover({ img, title }) {
       blur={{ min: -15, max: 15 }}
       bgImage={img}
       bgImageAlt="the dog"
+    //   bgImageStyle={{height: '700px'}}
       strength={-200}
     >
       <div className="hero h-[700px]">
