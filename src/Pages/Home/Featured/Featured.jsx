@@ -5,16 +5,16 @@ import './Featured.css'
 
 export default function Featured() {
   return (
-    <section className="feature-item text-white pt-8 my-20">
+    <section className="feature-item bg-fixed text-white pt-8 my-20 ">
       <SectionTitle
         subHeading={"check it out"}
         heading={"Featured Items"}
       ></SectionTitle>
-      <div className="md:flex justify-center items-center pb-20 pt-12 px-36">
+      <div className="md:flex justify-center items-center bg-slate-500 bg-opacity-60 pb-20 pt-12 px-36">
         <div>
           <img src={featuredImg} alt="" />
         </div>
-        <div className="md: ml-10">
+        <div className="md: ml-10 space-y-2">
           <p>Dec 30, 2025</p>
           <p className="uppercase">Where can i get some</p>
           <p>
@@ -24,7 +24,7 @@ export default function Featured() {
             inventore quasi iusto necessitatibus exercitationem? Error assumenda
             enim molestiae, ipsum dicta fuga?
           </p>
-          <button className="btn btn-outline">Read More</button>
+          <button className="btn btn-outline border-0 border-b-4">Read More</button>
         </div>
       </div>
     </section>
