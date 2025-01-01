@@ -5,15 +5,19 @@ import { Helmet } from "react-helmet-async";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../../../CustomHooks/useMenu";
+import OrderTab from "../OrderTab/OrderTab";
+import { useParams } from "react-router-dom";
 
 export default function Order() {
   const [tabIndex, setTabIndex] = useState(0);
   const [menu] = useMenu();
-  const dessartsMenu = menu.filter((item) => item.category === "dessart");
+  const { category } = useParams();
+  console.log(category);
+  const dessertsMenu = menu.filter((item) => item.category === "dessert");
   const soupMenu = menu.filter((item) => item.category === "soup");
   const saladMenu = menu.filter((item) => item.category === "salad");
   const pizzaMenu = menu.filter((item) => item.category === "pizza");
-  const offeredMenu = menu.filter((item) => item.category === "offered");
+  const drinksMenu = menu.filter((item) => item.category === "drinks");
   return (
     <div>
       <Helmet>
@@ -34,11 +38,21 @@ export default function Order() {
           <Tab>DESSERTS</Tab>
           <Tab>DRINKS</Tab>
         </TabList>
-        <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
+        <TabPanel>
+          <OrderTab items={saladMenu}></OrderTab>
+        </TabPanel>
+        <TabPanel>
+          <OrderTab items={pizzaMenu}></OrderTab>
+        </TabPanel>
+        <TabPanel>
+          <OrderTab items={soupMenu}></OrderTab>
+        </TabPanel>
+        <TabPanel>
+          <OrderTab items={dessertsMenu}></OrderTab>
+        </TabPanel>
+        <TabPanel>
+          <OrderTab items={drinksMenu}></OrderTab>
+        </TabPanel>
       </Tabs>
     </div>
   );

@@ -41,7 +41,7 @@ export default function Menu() {
       {/* dessets menu items */}
       <MenuCategory
         items={dessartsMenu}
-        title={"Dessarts"}
+        title={"dessarts"}
         subTitle={
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae a blanditiis, sit tenetur dignissimos iure?"
         }
@@ -50,7 +50,7 @@ export default function Menu() {
       {/* pizza menu items */}
       <MenuCategory
         items={pizzaMenu}
-        title={"Pizza"}
+        title={"pizza"}
         subTitle={
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae a blanditiis, sit tenetur dignissimos iure?"
         }
