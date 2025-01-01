@@ -13,7 +13,7 @@ import MenuCategory from "./MenuCategory/MenuCategory";
 
 export default function Menu() {
   const [menu] = useMenu();
-  const dessartsMenu = menu.filter((item) => item.category === "dessart");
+  const dessertsMenu = menu.filter((item) => item.category === "dessert");
   const soupMenu = menu.filter((item) => item.category === "soup");
   const saladMenu = menu.filter((item) => item.category === "salad");
   const pizzaMenu = menu.filter((item) => item.category === "pizza");
@@ -40,8 +40,8 @@ export default function Menu() {
       <MenuCategory items={offeredMenu}></MenuCategory>
       {/* dessets menu items */}
       <MenuCategory
-        items={dessartsMenu}
-        title={"dessarts"}
+        items={dessertsMenu}
+        title={"dessert"}
         subTitle={
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae a blanditiis, sit tenetur dignissimos iure?"
         }
