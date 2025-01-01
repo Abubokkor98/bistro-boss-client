@@ -12,11 +12,13 @@ export default function MenuCategory({ items, title, subTitle, img }) {
           <MenuItem key={item._id} item={item}></MenuItem>
         ))}
       </div>
-      <Link to={`/order/${title}`}>
+     <div className="text-center">
+     <Link to={`/order/${title}`}>
         <button className="btn btn-outline border-0 border-b-4">
           ORDER YOUR FAVORITE FOOD
         </button>
       </Link>
+     </div>
     </div>
   );
 }
