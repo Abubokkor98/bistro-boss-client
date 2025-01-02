@@ -8,9 +8,10 @@ import {
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 export default function Login() {
-  const chaptchaRef = useRef();
+  // const chaptchaRef = useRef();
   const [disabled, setDisabled] = useState(true);
   const { signIn } = useContext(AuthContext);
 
@@ -27,11 +28,19 @@ export default function Login() {
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User logIn successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     });
   };
 
-  const handleValidateCaptcha = () => {
-    const chaptchaValue = chaptchaRef.current.value;
+  const handleValidateCaptcha = (e) => {
+    // const chaptchaValue = chaptchaRef.current.value;
+    const chaptchaValue = e.target.value;
     if (validateCaptcha(chaptchaValue)) {
       setDisabled(false);
     } else {
@@ -90,19 +99,20 @@ export default function Login() {
                   <LoadCanvasTemplate />
                 </label>
                 <input
+                onBlur={handleValidateCaptcha}
                   type="text"
                   name="captcha"
-                  ref={chaptchaRef}
+                  // ref={chaptchaRef}
                   placeholder="type the captcha above"
                   className="input input-bordered"
                   required
                 />
-                <button
+                {/* <button type="button"
                   onClick={handleValidateCaptcha}
                   className="btn btn-outline btn-xs mt-2"
                 >
                   validate
-                </button>
+                </button> */}
               </div>
               <div className="form-control mt-6">
                 <input

@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export default function Navbar() {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        alert("User logged out");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const navOptions = (
     <>
       <li>
@@ -13,9 +26,22 @@ export default function Navbar() {
       <li>
         <Link to={"/order/salad"}>Order Food</Link>
       </li>
-      <li>
-        <Link to={"/login"}>Login</Link>
-      </li>
+
+      {user ? (
+        <>
+          <li>
+            <button onClick={handleLogOut} className="btn btn-ghost">
+              Log Out
+            </button>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link to={"/login"}>Login</Link>
+          </li>
+        </>
+      )}
     </>
   );
   return (
