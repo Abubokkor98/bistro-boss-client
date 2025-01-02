@@ -110,10 +110,10 @@ export default function SignUp() {
               </div>
             </form>
             <p>
-                          <small>
-                            Already have an account? <Link to={"/login"}>Please Login</Link>
-                          </small>
-                        </p>
+              <small>
+                Already have an account? <Link to={"/login"}>Please Login</Link>
+              </small>
+            </p>
           </div>
         </div>
       </div>
