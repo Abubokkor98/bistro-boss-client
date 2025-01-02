@@ -2,13 +2,14 @@ import React from "react";
 import useAuth from "../../CustomHooks/useAuth";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
 
 export default function FoodCard({ item }) {
   const { name, image, price, recipe, _id } = item;
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosSecure = useAxiosSecure();
 
   const handleAddToCart = (food) => {
     if (user && user?.email) {
@@ -21,20 +22,18 @@ export default function FoodCard({ item }) {
         image,
         price,
       };
-      axios
-        .post(`${import.meta.env.VITE_API_URL}/carts`, cartItem)
-        .then((res) => {
-          console.log(res.data);
-          if (res.data.insertedId) {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: `${name} added to your cart!`,
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }
-        });
+      axiosSecure.post("/carts", cartItem).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${name} added to your cart!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
     } else {
       Swal.fire({
         title: "You are not logged In",
