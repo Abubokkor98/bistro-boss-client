@@ -29,6 +29,7 @@ export default function Navbar() {
 
       {user ? (
         <>
+        <button>{user?.displayName}</button>
           <li>
             <button onClick={handleLogOut} className="btn btn-ghost">
               Log Out
