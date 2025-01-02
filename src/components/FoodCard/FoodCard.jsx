@@ -3,6 +3,7 @@ import useAuth from "../../CustomHooks/useAuth";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../CustomHooks/useAxiosSecure";
+import useCart from "../../CustomHooks/useCart";
 
 export default function FoodCard({ item }) {
   const { name, image, price, recipe, _id } = item;
@@ -10,11 +11,17 @@ export default function FoodCard({ item }) {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
+  /**
+   * ------------
+   * note for me
+   * ------------
+   * refetch er jonno ekhane cart takeo lagbe, but jehetu ami cart ekhane use korbona tai , diye cart take invisible rakhtesi...
+   */
+  const [, refetch] = useCart();
 
   const handleAddToCart = (food) => {
     if (user && user?.email) {
       // send cart to the server
-      console.log(user.email, food);
       const cartItem = {
         itemId: _id,
         email: user.email,
@@ -32,6 +39,8 @@ export default function FoodCard({ item }) {
             showConfirmButton: false,
             timer: 1500,
           });
+          // refetch the cart
+          refetch();
         }
       });
     } else {
