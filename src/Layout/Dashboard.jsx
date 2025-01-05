@@ -10,14 +10,22 @@ import {
 import { FaMessage } from "react-icons/fa6";
 import { MdReviews } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
+import useCart from "../CustomHooks/useCart";
 
 export default function Dashboard() {
+  const [cart] = useCart();
+
+  // TODO: get isAdmin value from the database
+  const isAdmin = true;
+
   return (
     <div className="flex">
       <div className="w-64 min-h-screen bg-orange-400">
         <div className="uppercase p-5">
           <h2 className="text-3xl font-bold">bistro boss</h2>
-          <span className="text-xl font-semibold tracking-[0.5em]">RESTURANT</span>
+          <span className="text-xl font-semibold tracking-[0.5em]">
+            RESTURANT
+          </span>
         </div>
         <ul className="menu">
           <li>
@@ -51,6 +59,7 @@ export default function Dashboard() {
             </NavLink>
           </li>
           <div className="divider"></div>
+          {/* common navlinks */}
           <li>
             <NavLink to={"/"}>
               <FaHome></FaHome>

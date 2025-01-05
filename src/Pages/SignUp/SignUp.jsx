@@ -5,6 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../CustomHooks/useAxiosPublic";
+import GoogleLogin from "../../components/SocialLogin/GoogleLogin";
 
 export default function SignUp() {
   const {
@@ -155,6 +156,9 @@ export default function SignUp() {
                 Already have an account? <Link to={"/login"}>Please Login</Link>
               </small>
             </p>
+            <div className="text-center">
+                        <GoogleLogin></GoogleLogin>
+                        </div>
           </div>
         </div>
       </div>

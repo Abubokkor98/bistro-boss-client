@@ -9,6 +9,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import GoogleLogin from "../../components/SocialLogin/GoogleLogin";
 
 export default function Login() {
   // const chaptchaRef = useRef();
@@ -127,11 +128,14 @@ export default function Login() {
                 />
               </div>
             </form>
-            <p>
+            <p className="p-4">
               <small>
                 New Here? <Link to={"/signup"}>Create an accout</Link>
               </small>
             </p>
+            <div className="text-center">
+            <GoogleLogin></GoogleLogin>
+            </div>
           </div>
         </div>
       </div>
