@@ -1,19 +1,48 @@
 import React from "react";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { FaUsers } from "react-icons/fa";
-import { FaDeleteLeft } from "react-icons/fa6";
-import { MdDeleteForever } from "react-icons/md";
+import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 export default function AllUsers() {
   const axiosSecure = useAxiosSecure();
-  const { data: users = [] } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const { data } = await axiosSecure.get("/users");
       return data;
     },
   });
+
+  const handleMakeAdmin = user=>{
+    
+  }
+
+  const handleDeleteUser = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${user._id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your item has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
+  };
+
   return (
     <div>
       <div className="flex justify-evenly my-4">
@@ -23,7 +52,7 @@ export default function AllUsers() {
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}
-          <thead>
+          <thead className="bg-orange-500">
             <tr>
               <th></th>
               <th>NAME</th>
@@ -35,11 +64,25 @@ export default function AllUsers() {
           <tbody>
             {users.map((user, index) => (
               <tr key={user._id}>
-                <th>{index+1}</th>
+                <th>{index + 1}</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td><FaUsers className="text-2xl"></FaUsers></td>
-                <td><MdDeleteForever className="text-red-600 text-2xl"/></td>
+                <td>
+                  <button
+                    onClick={() => handleMakeAdmin(user)}
+                    className="btn bg-orange-500"
+                  >
+                    <FaUsers className="text-white text-2xl"></FaUsers>
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => handleDeleteUser(user)}
+                    className="btn bg-red-500"
+                  >
+                    <FaTrashAlt className="text-white text-2xl"></FaTrashAlt>
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
