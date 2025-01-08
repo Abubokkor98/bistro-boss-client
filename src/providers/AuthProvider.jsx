@@ -73,7 +73,7 @@ export default function AuthProvider({ children }) {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [AxiosPublic]);
 
   const authInfo = {
     user,
