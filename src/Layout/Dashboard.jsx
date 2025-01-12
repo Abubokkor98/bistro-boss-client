@@ -127,7 +127,7 @@ export default function Dashboard() {
           </li>
         </ul>
       </div>
-      <div className="flex-1 bg-slate-400 p-6">
+      <div className="flex-1 bg-white p-6">
         <Outlet></Outlet>
       </div>
     </div>
