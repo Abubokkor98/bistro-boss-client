@@ -14,6 +14,7 @@ import AddItems from "../Pages/Dashboard/AddItems/AddItems";
 import AdminRoutes from "./AdminRoutes";
 import ManageItems from "../Pages/Dashboard/manageItems/ManageItems";
 import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -58,9 +59,14 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // normal user route
       {
         path: "cart",
         element: <Cart></Cart>,
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
       },
 
       // admin routes
@@ -97,14 +103,12 @@ export const router = createBrowserRouter([
         ),
         loader: ({ params }) => {
           return fetch(`${import.meta.env.VITE_API_URL}/menu/${params.id}`)
-            .then(response => response.json())
-            .catch(error => {
+            .then((response) => response.json())
+            .catch((error) => {
               console.error("Error fetching data:", error);
               return null; // Return null if an error occurs
             });
-        }
-        
-        
+        },
       },
     ],
   },
