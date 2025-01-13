@@ -1,8 +1,10 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useState } from "react";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,8 +23,10 @@ export default function CheckoutForm() {
 
     if (error) {
       console.log("payment error", error);
+      setError(error.message);
     } else {
       console.log("PaymentMethod", paymentMethod);
+      setError("");
     }
   };
 
@@ -53,6 +57,7 @@ export default function CheckoutForm() {
           Pay
         </button>
       </form>
+      <p className="text-red-500">{error}</p>
     </div>
   );
 }
