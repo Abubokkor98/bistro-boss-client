@@ -1,6 +1,6 @@
 import React from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
@@ -12,6 +12,7 @@ export default function UpdateItem() {
   const { register, handleSubmit } = useForm();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate()
 
   const { name, category, recipe, price, _id } = useLoaderData();
   const onSubmit = async (data) => {
@@ -34,7 +35,7 @@ export default function UpdateItem() {
       };
       const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem);
       console.log(menuRes.data);
-      if (menuRes.data.insertedId) {
+      if (menuRes.data.modifiedCount > 0) {
         // show success popup
         Swal.fire({
           position: "top-end",
@@ -43,15 +44,13 @@ export default function UpdateItem() {
           showConfirmButton: false,
           timer: 1500,
         });
+        navigate('/dashboard/manageItems')
       }
     }
   };
   return (
     <div>
-      <SectionTitle
-        heading={`update ${name}`}
-        subHeading={`refresh info`}
-      />
+      <SectionTitle heading={`update ${name}`} subHeading={`refresh info`} />
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label className="form-control w-full my-6">

@@ -25,7 +25,7 @@ export default function Dashboard() {
   return (
     <div className="flex">
       <div className="w-64 min-h-screen bg-orange-400">
-        <div className="uppercase p-5">
+        <div className="uppercase p-5 ">
           <h2 className="text-3xl font-bold">bistro boss</h2>
           <span className="text-xl font-semibold tracking-[0.5em]">
             RESTURANT
