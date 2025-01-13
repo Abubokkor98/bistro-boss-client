@@ -1,17 +1,19 @@
 import React from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import { useLoaderData } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { FaUtensils } from "react-icons/fa";
-import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../CustomHooks/useAxiosPublic";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-export default function AddItems() {
-  const axiosPublic = useAxiosPublic();
+export default function UpdateItem() {
+  const { register, handleSubmit } = useForm();
   const axiosSecure = useAxiosSecure();
-  const { register, handleSubmit, reset } = useForm();
+  const axiosPublic = useAxiosPublic();
+
+  const { name, category, recipe, price, _id } = useLoaderData();
   const onSubmit = async (data) => {
     console.log(data);
     // upload image to the image bb and get an URL
@@ -30,27 +32,26 @@ export default function AddItems() {
         recipe: data.recipe,
         image: res.data.data.display_url,
       };
-      const menuRes = await axiosSecure.post("/menu", menuItem);
+      const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem);
       console.log(menuRes.data);
       if (menuRes.data.insertedId) {
         // show success popup
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${data.name} is added to the menu`,
+          title: `${data.name} is updated to the menu`,
           showConfirmButton: false,
           timer: 1500,
         });
-        reset();
       }
     }
   };
   return (
-    <div className="">
+    <div>
       <SectionTitle
-        heading={"add items"}
-        subHeading={"what's new"}
-      ></SectionTitle>
+        heading={`update ${name}`}
+        subHeading={`refresh info`}
+      />
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label className="form-control w-full my-6">
@@ -60,6 +61,7 @@ export default function AddItems() {
             <input
               {...register("name", { required: true })}
               type="text"
+              defaultValue={name}
               placeholder="Recipe Name"
               className="input input-bordered w-full "
             />
@@ -72,7 +74,7 @@ export default function AddItems() {
               </div>
               <select
                 {...register("category", { required: true })}
-                defaultValue={"default"}
+                defaultValue={category}
                 className="select select-bordered w-full "
               >
                 <option disabled value={"default"}>
@@ -93,6 +95,7 @@ export default function AddItems() {
               <input
                 {...register("price", { required: true })}
                 type="number"
+                defaultValue={price}
                 placeholder="price"
                 className="input input-bordered w-full "
               />
@@ -108,6 +111,7 @@ export default function AddItems() {
               {...register("recipe", { required: true })}
               className="textarea textarea-bordered h-24"
               placeholder="recipe"
+              defaultValue={recipe}
             ></textarea>
 
             {/* file input */}
@@ -119,7 +123,7 @@ export default function AddItems() {
           </label>
 
           <button type="submit" className="btn bg-orange-400">
-            Add Items <FaUtensils></FaUtensils>
+            Update Item
           </button>
         </form>
       </div>

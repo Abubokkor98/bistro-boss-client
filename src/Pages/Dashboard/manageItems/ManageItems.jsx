@@ -4,6 +4,7 @@ import useMenu from "../../../CustomHooks/useMenu";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../CustomHooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 export default function ManageItems() {
   const [menu, , refetch] = useMenu();
@@ -67,12 +68,11 @@ export default function ManageItems() {
                   <td>{item.name}</td>
                   <td>${item.price}</td>
                   <td>
-                    <button
-                      onClick={() => handleUpdate(item._id)}
-                      className="btn btn-ghost btn-lg"
-                    >
-                      <FaEdit className="text-green-600"></FaEdit>
-                    </button>
+                    <Link to={`/dashboard/updateItem/${item._id}`}>
+                      <button className="btn btn-ghost btn-lg">
+                        <FaEdit className="text-green-600"></FaEdit>
+                      </button>
+                    </Link>
                     <button
                       onClick={() => handleDeleteItem(item)}
                       className="btn btn-ghost btn-lg"
