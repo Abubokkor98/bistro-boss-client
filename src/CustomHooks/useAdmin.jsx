@@ -9,6 +9,7 @@ export default function useAdmin() {
   const { data: isAdmin, isPending: isAdminLoading } = useQuery({
     queryKey: [email, "isAdmin"],
     queryFn: async () => {
+      console.log("asking or checking isAdmin",user);
       const { data } = await axiosSecure.get(`/users/admin/${email}`);
       return data?.admin;
     },

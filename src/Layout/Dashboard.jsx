@@ -35,7 +35,7 @@ export default function Dashboard() {
           {isAdmin ? (
             <>
               <li>
-                <NavLink to={"/dashboard/admin-home"}>
+                <NavLink to={"/dashboard/adminHome"}>
                   <FaHome></FaHome>
                   ADMIN HOME
                 </NavLink>
@@ -68,7 +68,7 @@ export default function Dashboard() {
           ) : (
             <>
               <li>
-                <NavLink to={"/dashboard/user-home"}>
+                <NavLink to={"/dashboard/userHome"}>
                   <FaHome></FaHome>
                   USER HOME
                 </NavLink>
