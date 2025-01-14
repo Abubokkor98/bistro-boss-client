@@ -12,7 +12,7 @@ export default function useAxiosSecure() {
   axiosSecure.interceptors.request.use(
     function (config) {
       const token = localStorage.getItem("access-token");
-      console.log("request stopped by interceptor before adding token", token);
+      // console.log("request stopped by interceptor", token);
       config.headers.authorization = `Bearer ${token}`;
       return config;
     },
