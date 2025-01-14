@@ -82,7 +82,7 @@ export default function Dashboard() {
               <li>
                 <NavLink to={"/dashboard/cart"}>
                   <FaShoppingCart></FaShoppingCart>
-                  MY CART
+                  MY CART ({cart.length})
                 </NavLink>
               </li>
               <li>
@@ -92,9 +92,9 @@ export default function Dashboard() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to={"/dashboard/bookings"}>
+                <NavLink to={"/dashboard/paymentHistory"}>
                   <FaList></FaList>
-                  MY BOOKING
+                  MY PAYMENT HISTORY
                 </NavLink>
               </li>
             </>
